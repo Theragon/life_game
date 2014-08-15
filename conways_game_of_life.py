@@ -9,36 +9,23 @@ def main():
 	x = int(sys.argv[1])
 	y = int(sys.argv[2])
 
-	break_line = x - 1
+	universe = Universe(x, y)
 	
-	world = [[0 for i in xrange(x)] for j in xrange(y)]
-	world[0][4] = 5
+	#world = [[0 for i in xrange(x)] for j in xrange(y)]
+	#world[0][4] = 5
 
 	print('x: ' + str(x))
 	print('y: ' + str(y))
 
-	for _x in xrange(x):
-		for _y in xrange(y):
-			print(world[_x][_y])
-			if _y == break_line:
-				print('')
+	render(universe)
+	
 
 def render(universe):
-	a = []
-	for i in xrange(3):
-		a.append([])
-		for j in xrange(3):
-			a[i].append(i+j)
-
-	#rows
-	for i in xrange(3):
-		
-		#columns
-		for j in xrange(3):
-			if(i % 3 == 0):
+	for _x in xrange(universe.x):
+		for _y in xrange(universe.y):
+			print(universe.world[_x][_y]),
+			if _y == universe.end_of_world:
 				print('')
-			else:
-				print(a[i][j]),
 
 def maxItemLength(a):
     maxLen = 0
@@ -50,27 +37,6 @@ def maxItemLength(a):
     return maxLen
 
 
-def print2dList(a):
-	if (a == []):
-		# So we don't crash accessing a[0]
-		print []
-		return
-	rows = len(a)
-	cols = len(a[0])
-	fieldWidth = maxItemLength(a)
-	#print "[ ",
-	for row in xrange(rows):
-		if (row > 0): print "\n  ",
-		#print "[ ",
-		for col in xrange(cols):
-			if (col > 0): print ",",
-			# The next 2 lines print a[row][col] with the given fieldWidth
-			format = "%" + str(fieldWidth) + "s"
-			print format % str(a[row][col]),
-		#print "]",
-	#print "]"
-
-
 def update():
 	pass
 
@@ -79,8 +45,9 @@ class Universe:
 		print('creating universe')
 		self.x = x
 		self.y = y
+		self.end_of_world = x - 1
 
-		#self.world = self.make_world(x, y)
+		self.world = [[0 for i in xrange(x)] for j in xrange(y)]
 
 	def make_world(self, x, y):
 		world = []
