@@ -22,20 +22,15 @@ def main():
 
 def render(universe):
 	for _x in xrange(universe.x):
+		#print('_x: ' + str(_x))
+		#print('universe.x: ' + str(universe.x))
 		for _y in xrange(universe.y):
+			#print('_y: ' + str(_y))
+			#print('universe.y: ' + str(universe.y))
 			print(universe.world[_x][_y]),
-			if _y == universe.end_of_world:
+			if _y == universe.y-1:
 				print('')
-
-def maxItemLength(a):
-    maxLen = 0
-    rows = len(a)
-    cols = len(a[0])
-    for row in xrange(rows):
-        for col in xrange(cols):
-            maxLen = max(maxLen, len(str(a[row][col])))
-    return maxLen
-
+			
 
 def update():
 	pass
@@ -47,7 +42,7 @@ class Universe:
 		self.y = y
 		self.end_of_world = x - 1
 
-		self.world = [[0 for i in xrange(x)] for j in xrange(y)]
+		self.world = [['_' for i in xrange(y)] for j in xrange(x)]
 
 	def make_world(self, x, y):
 		world = []
